@@ -1,10 +1,6 @@
 package org.example;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
