@@ -1,5 +1,10 @@
 package org.example;
 
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,23 +19,18 @@ public class HttpStatusChecker {
         connection.connect();
 
         int responseCode = connection.getResponseCode();
-        System.out.println("Response code of the object is " + responseCode);
 
-        if (responseCode == 200) {
-             url = url;
-        } else if (responseCode == 404) {
+        if (responseCode == 404) {
             throw new FileIsNotAvailableException();
         }
         return url.toString();
     }
 
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args) throws FileIsNotAvailableException, IOException {
         HttpStatusChecker checker = new HttpStatusChecker();
-        try {
-            System.out.println(checker.getStatusImage(200)); // Should work
-            //System.out.println(checker.getStatusImage(10000)); // Should throw an exception
-        } catch (IOException | FileIsNotAvailableException e) {
-            e.printStackTrace();
-        }
+        checker.getStatusImage(200);
+        checker.getStatusImage(4000);
     }
 }

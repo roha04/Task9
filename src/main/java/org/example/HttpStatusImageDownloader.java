@@ -20,26 +20,17 @@ public class HttpStatusImageDownloader {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
-        int responseCode = connection.getResponseCode();
-        if (responseCode == 200) {
-            BufferedImage image = ImageIO.read(connection.getInputStream());
+        BufferedImage image = ImageIO.read(connection.getInputStream());
 
-            String fileName = "status_" + code + ".jpg";
-            File outputFile = new File(fileName);
+        String fileName = "status_" + code + ".jpg";
+        File outputFile = new File(fileName);
 
-            ImageIO.write(image, "jpg", outputFile);
+        ImageIO.write(image, "jpg", outputFile);
 
-            System.out.println("Image downloaded and saved as: " + outputFile.getAbsolutePath());
-        } else {
-            throw new FileIsNotAvailableException();
-        }
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws FileIsNotAvailableException, IOException {
         HttpStatusImageDownloader downloader = new HttpStatusImageDownloader();
-        try {
-            downloader.downloadStatusImage(200);
-        } catch (IOException | FileIsNotAvailableException e) {
-            e.printStackTrace();
-        }
+        downloader.downloadStatusImage(2000);
     }
 }
